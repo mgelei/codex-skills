@@ -27,10 +27,11 @@ jobs:
           set -euo pipefail
 
           python3 -m venv .venv
-          .venv/bin/python -m pip install "git+https://github.com/agentskills/agentskills.git@2d3e01f590f68bee2cb76a3200823e93b2cc9eaa#subdirectory=skills-ref"
+          .venv/bin/python -m pip install --upgrade pip
+          .venv/bin/python -m pip install skills-ref==0.1.1
 
-          .venv/bin/skills-ref validate prompt-architect
-          .venv/bin/skills-ref validate bootstrap-project
+          .venv/bin/agentskills validate prompt-architect
+          .venv/bin/agentskills validate bootstrap-project
 
       - name: Build explicit skill archives
         shell: bash
