@@ -1,5 +1,5 @@
 ---
-name: project-bootstrapper
+name: bootstrap-project
 description: Bootstrap new software projects from rough app or product ideas into written foundations. Use when Codex needs to help a user clarify early project decisions, choose a practical tech stack, define architecture and design constraints, research current options or best practices, and create or update AGENTS.md plus a high-level project specification or user-specified context files. Do not use for ordinary implementation, debugging, refactoring, code review, or feature work.
 ---
 
