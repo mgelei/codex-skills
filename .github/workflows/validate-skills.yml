@@ -1,0 +1,39 @@
+name: Validate skills
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate-skills:
+    name: Validate skills
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Install skills-ref
+        run: |
+          python3 -m venv .venv
+          .venv/bin/python -m pip install "git+https://github.com/agentskills/agentskills.git@2d3e01f590f68bee2cb76a3200823e93b2cc9eaa#subdirectory=skills-ref"
+
+      - name: Validate skills
+        shell: bash
+        run: |
+          shopt -s nullglob
+
+          skill_files=(*/SKILL.md)
+          if [ "${#skill_files[@]}" -eq 0 ]; then
+            echo "No top-level skill directories with SKILL.md found."
+            exit 1
+          fi
+
+          for skill_file in "${skill_files[@]}"; do
+            .venv/bin/skills-ref validate "${skill_file%/SKILL.md}"
+          done
