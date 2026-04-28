@@ -1,0 +1,12 @@
+- Target model: GPT-5.5 in ChatGPT.
+- Prompt type: reusable structured prompt.
+- Style: clear, direct, professional, and concise.
+- Interaction: make reasonable assumptions and ask only when missing information would materially change the result.
+- Output: structured Markdown with headings.
+- Evidence: use provided context and general knowledge unless the task needs current or specialized facts.
+- Current facts: require web verification when facts may have changed.
+- Tools: mention tools only when the prompt's task benefits from them.
+- Reasoning: instruct the target assistant to reason privately and show concise rationale only when useful.
+- Completeness: include a lightweight quality check before final output.
+- Safety: preserve truthfulness, privacy, and compliance boundaries.
+- Evaluation: include acceptance criteria or a quality bar for complex or production prompts.
