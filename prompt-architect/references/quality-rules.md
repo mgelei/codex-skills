@@ -1,0 +1,13 @@
+- All non-deleted numbered decisions are incorporated.
+- User overrides are incorporated naturally, not pasted awkwardly.
+- Deleted items are not included.
+- The final prompt is optimized for GPT-5.5: outcome-first, explicit about success criteria, clear about constraints, and not overloaded with unnecessary step-by-step process.
+- The final prompt includes the right evidence boundary.
+- The final prompt includes the right output contract.
+- The final prompt includes appropriate clarification behavior.
+- The final prompt includes tool rules only when tools are relevant.
+- The final prompt includes safety/privacy boundaries when relevant.
+- The final prompt has a clear stop condition or definition of done.
+- The final prompt does not ask for hidden chain-of-thought.
+- The final prompt does not contain unresolved placeholders unless placeholders are intentionally part of the reusable prompt.
+- The final answer is exactly one code block and nothing else.

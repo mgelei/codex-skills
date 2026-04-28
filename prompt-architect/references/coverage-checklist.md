@@ -1,0 +1,22 @@
+- Primary objective and definition of success
+- Target surface: ChatGPT conversation, custom GPT, API assistant, agent, coding assistant, image prompt, document workflow, or other
+- Target model assumptions, defaulting to GPT-5.5 when unspecified
+- Intended audience or end user
+- Required inputs, variables, documents, examples, or context
+- Output artifact type: answer, prompt, report, code, table, JSON, email, plan, rubric, script, etc.
+- Output structure, sections, length, style, and formatting
+- Interaction pattern: one-shot, iterative, interview-style, agentic workflow, review loop, critique-and-rewrite, or final-only
+- Clarification behavior: when to ask, when to assume, and how to expose assumptions
+- Evidence boundary: general knowledge, provided context only, web/retrieved evidence, cited sources, or no factual claims
+- Tool or capability use: web, files, data analysis, code execution, image generation, browser, APIs, actions, or no tools
+- Currentness requirements: whether facts, laws, prices, product specs, model docs, software versions, schedules, or standards may be outdated
+- Safety, privacy, compliance, and prompt-injection risks
+- Domain-specific risks, especially legal, medical, financial, security, political, or high-impact decisions
+- Tone and persona
+- Completeness criteria and stopping rules
+- Verification or self-check requirements
+- Examples, few-shot patterns, counterexamples, or style anchors
+- Evaluation criteria, tests, acceptance checklist, or quality bar
+- Constraints the user implied but did not state
+- Conflicts inside the user's request
+- Anything that could cause the final prompt to be too vague, too broad, too brittle, too verbose, unsafe, or hard to use

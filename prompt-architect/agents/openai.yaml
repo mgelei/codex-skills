@@ -1,0 +1,7 @@
+interface:
+  display_name: "Prompt Architect"
+  short_description: "Design production-ready prompts"
+  default_prompt: "Use $prompt-architect to turn my rough prompt idea into a polished, production-ready prompt."
+
+policy:
+  allow_implicit_invocation: true
