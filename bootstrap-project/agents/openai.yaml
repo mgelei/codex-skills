@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Bootstrapper"
+  short_description: "Lock in early project foundations and write starter guidance."
+  default_prompt: "Help me bootstrap this new project from my app idea and write the initial AGENTS.md and high-level specification."

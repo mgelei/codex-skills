@@ -31,6 +31,7 @@ jobs:
           .venv/bin/python -m pip install skills-ref==0.1.1
 
           .venv/bin/agentskills validate prompt-architect
+          .venv/bin/agentskills validate bootstrap-project
 
       - name: Build explicit skill archives
         shell: bash
@@ -72,6 +73,10 @@ jobs:
             prompt-architect/references/coverage-checklist.md \
             prompt-architect/references/prompt-design-defaults.md \
             prompt-architect/references/quality-rules.md
+
+          package_skill bootstrap-project \
+            bootstrap-project/SKILL.md \
+            bootstrap-project/agents/openai.yaml
 
       - name: Attach archives to release
         env:
