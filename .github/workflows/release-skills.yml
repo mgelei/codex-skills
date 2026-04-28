@@ -1,0 +1,92 @@
+name: Release skills
+
+on:
+  release:
+    types:
+      - published
+
+permissions:
+  contents: write
+
+jobs:
+  package-skills:
+    name: Package skill zip files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout release tag
+        # actions/checkout@v6.0.2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          persist-credentials: false
+
+      - name: Validate listed skills
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python3 -m venv .venv
+          .venv/bin/python -m pip install --upgrade pip
+          .venv/bin/python -m pip install skills-ref==0.1.1
+
+          .venv/bin/agentskills validate prompt-architect
+
+      - name: Build explicit skill archives
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          rm -rf dist
+          mkdir -p dist
+
+          package_skill() {
+            local skill_name="$1"
+            shift
+
+            local staging_dir
+            staging_dir="$(mktemp -d)"
+            mkdir -p "${staging_dir}/${skill_name}"
+
+            for path in "$@"; do
+              if [[ ! -f "${path}" ]]; then
+                echo "::error file=${path}::Listed release file does not exist"
+                exit 1
+              fi
+
+              mkdir -p "${staging_dir}/$(dirname "${path}")"
+              cp "${path}" "${staging_dir}/${path}"
+            done
+
+            (
+              cd "${staging_dir}"
+              zip -r "${GITHUB_WORKSPACE}/dist/${skill_name}.zip" "${skill_name}"
+            )
+
+            rm -rf "${staging_dir}"
+          }
+
+          package_skill prompt-architect \
+            prompt-architect/SKILL.md \
+            prompt-architect/agents/openai.yaml \
+            prompt-architect/references/coverage-checklist.md \
+            prompt-architect/references/prompt-design-defaults.md \
+            prompt-architect/references/quality-rules.md
+
+      - name: Attach archives to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          shopt -s nullglob
+          archives=(dist/*.zip)
+
+          if (( ${#archives[@]} == 0 )); then
+            echo "::error::No skill archives were built"
+            exit 1
+          fi
+
+          gh release upload "${RELEASE_TAG}" "${archives[@]}" --clobber
